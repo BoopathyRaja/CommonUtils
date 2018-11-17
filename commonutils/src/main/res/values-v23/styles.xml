@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/blueDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/accent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="AppTheme">
+        <item name="android:windowBackground">@color/lightWindowBackground</item>
+        <item name="android:textColorPrimary">@color/lightTextPrimary</item>
+        <item name="android:textColorSecondary">@color/lightTextSecondary</item>
+        <item name="android:textColorHint">@color/lightTextHint</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <item name="android:windowBackground">@color/darkWindowBackground</item>
+        <item name="android:textColorPrimary">@color/darkTextPrimary</item>
+        <item name="android:textColorSecondary">@color/darkTextSecondary</item>
+        <item name="android:textColorHint">@color/darkTextHint</item>
+    </style>
+
+    <style name="RedTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/redPrimary</item>
+        <item name="colorPrimaryDark">@color/redDark</item>
+        <item name="android:statusBarColor">@color/redDark</item>
+    </style>
+
+    <style name="PinkTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryDark">@color/pinkDark</item>
+        <item name="android:statusBarColor">@color/pinkDark</item>
+    </style>
+
+    <style name="PurpleTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/purplePrimary</item>
+        <item name="colorPrimaryDark">@color/purpleDark</item>
+        <item name="android:statusBarColor">@color/purpleDark</item>
+    </style>
+
+    <style name="DeepPurpleTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/deepPurplePrimary</item>
+        <item name="colorPrimaryDark">@color/deepPurpleDark</item>
+        <item name="android:statusBarColor">@color/deepPurpleDark</item>
+    </style>
+
+    <style name="IndigoTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/indigoPrimary</item>
+        <item name="colorPrimaryDark">@color/indigoDark</item>
+        <item name="android:statusBarColor">@color/indigoDark</item>
+    </style>
+
+    <style name="BlueTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/blueDark</item>
+        <item name="android:statusBarColor">@color/blueDark</item>
+    </style>
+
+    <style name="LightBlueTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/lightBluePrimary</item>
+        <item name="colorPrimaryDark">@color/lightBlueDark</item>
+        <item name="android:statusBarColor">@color/lightBlueDark</item>
+    </style>
+
+    <style name="CyanTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/cyanPrimary</item>
+        <item name="colorPrimaryDark">@color/cyanDark</item>
+        <item name="android:statusBarColor">@color/cyanDark</item>
+    </style>
+
+    <style name="TealTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/tealPrimary</item>
+        <item name="colorPrimaryDark">@color/tealDark</item>
+        <item name="android:statusBarColor">@color/tealDark</item>
+    </style>
+
+    <style name="GreenTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/greenPrimary</item>
+        <item name="colorPrimaryDark">@color/greenDark</item>
+        <item name="android:statusBarColor">@color/greenDark</item>
+    </style>
+
+    <style name="LightGreenTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/lightGreenPrimary</item>
+        <item name="colorPrimaryDark">@color/lightGreenDark</item>
+        <item name="android:statusBarColor">@color/lightGreenDark</item>
+    </style>
+
+    <style name="LimeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/limePrimary</item>
+        <item name="colorPrimaryDark">@color/limeDark</item>
+        <item name="android:statusBarColor">@color/limeDark</item>
+    </style>
+
+    <style name="YellowTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/yellowPrimary</item>
+        <item name="colorPrimaryDark">@color/yellowDark</item>
+        <item name="android:statusBarColor">@color/yellowDark</item>
+    </style>
+
+    <style name="AmberTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/amberPrimary</item>
+        <item name="colorPrimaryDark">@color/amberDark</item>
+        <item name="android:statusBarColor">@color/amberDark</item>
+    </style>
+
+    <style name="OrangeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/orangePrimary</item>
+        <item name="colorPrimaryDark">@color/orangeDark</item>
+        <item name="android:statusBarColor">@color/orangeDark</item>
+    </style>
+
+    <style name="DeepOrangeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/deepOrangePrimary</item>
+        <item name="colorPrimaryDark">@color/deepOrangeDark</item>
+        <item name="android:statusBarColor">@color/deepOrangeDark</item>
+    </style>
+
+    <style name="BrownTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/brownPrimary</item>
+        <item name="colorPrimaryDark">@color/brownDark</item>
+        <item name="android:statusBarColor">@color/brownDark</item>
+    </style>
+
+    <style name="GrayTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/grayPrimary</item>
+        <item name="colorPrimaryDark">@color/grayDark</item>
+        <item name="android:statusBarColor">@color/grayDark</item>
+    </style>
+
+    <style name="BlueGrayTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/blueGrayPrimary</item>
+        <item name="colorPrimaryDark">@color/blueGrayDark</item>
+        <item name="android:statusBarColor">@color/blueGrayDark</item>
+    </style>
+
+</resources>

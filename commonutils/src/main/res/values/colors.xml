@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="redPrimary">#F44336</color>
+    <color name="redDark">#D32F2F</color>
+
+    <color name="pinkPrimary">#E91E63</color>
+    <color name="pinkDark">#C2185B</color>
+
+    <color name="purplePrimary">#9C27B0</color>
+    <color name="purpleDark">#7B1FA2</color>
+
+    <color name="deepPurplePrimary">#673AB7</color>
+    <color name="deepPurpleDark">#512DA8</color>
+
+    <color name="indigoPrimary">#3F51B5</color>
+    <color name="indigoDark">#303F9F</color>
+
+    <color name="bluePrimary">#2196F3</color>
+    <color name="blueDark">#1976D2</color>
+
+    <color name="lightBluePrimary">#03A9F4</color>
+    <color name="lightBlueDark">#0288D1</color>
+
+    <color name="cyanPrimary">#00BCD4</color>
+    <color name="cyanDark">#0097A7</color>
+
+    <color name="tealPrimary">#009688</color>
+    <color name="tealDark">#00796B</color>
+
+    <color name="greenPrimary">#4CAF50</color>
+    <color name="greenDark">#388E3C</color>
+
+    <color name="lightGreenPrimary">#8BC34A</color>
+    <color name="lightGreenDark">#689F38</color>
+
+    <color name="limePrimary">#CDDC39</color>
+    <color name="limeDark">#AFB42B</color>
+
+    <color name="yellowPrimary">#FFEB3B</color>
+    <color name="yellowDark">#FBC02D</color>
+
+    <color name="amberPrimary">#FFC107</color>
+    <color name="amberDark">#FFA000</color>
+
+    <color name="orangePrimary">#FF9800</color>
+    <color name="orangeDark">#F57C00</color>
+
+    <color name="deepOrangePrimary">#FF5722</color>
+    <color name="deepOrangeDark">#E64A19</color>
+
+    <color name="brownPrimary">#795548</color>
+    <color name="brownDark">#5D4037</color>
+
+    <color name="grayPrimary">#9E9E9E</color>
+    <color name="grayDark">#616161</color>
+
+    <color name="blueGrayPrimary">#607D8B</color>
+    <color name="blueGrayDark">#455A64</color>
+
+    <color name="transparent">#00000000</color>
+
+    <!-- Light Background -->
+    <color name="lightWindowBackground">#FAFAFA</color>
+    <color name="lightTextPrimary">#DE000000</color>
+    <color name="lightTextSecondary">#8A000000</color>
+    <color name="lightTextHint">#61000000</color>
+    <color name="lightDivider">#1F000000</color>
+
+    <!-- Dark Background -->
+    <color name="darkWindowBackground">#E1E1E1</color>
+    <color name="darkTextPrimary">#FFFFFFFF</color>
+    <color name="darkTextSecondary">#B3FFFFFF</color>
+    <color name="darkTextHint">#80FFFFFF</color>
+    <color name="darkDivider">#1FFFFFFF</color>
+
+    <!-- Color Accent -->
+    <color name="accent">#9E9E9E</color>
+    <color name="accent_90">#E69E9E9E</color>
+    <color name="accent_80">#CC9E9E9E</color>
+    <color name="accent_70">#B39E9E9E</color>
+    <color name="accent_60">#999E9E9E</color>
+    <color name="accent_50">#809E9E9E</color>
+    <color name="accent_40">#669E9E9E</color>
+    <color name="accent_30">#4D9E9E9E</color>
+    <color name="accent_20">#329E9E9E</color>
+    <color name="accent_10">#1A9E9E9E</color>
+
+    <!-- White -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_90">#E6FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_20">#32FFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+
+    <!-- Black -->
+    <color name="black">#000000</color>
+    <color name="black_90">#E6000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_70">#B3000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_20">#32000000</color>
+    <color name="black_10">#1A000000</color>
+</resources>

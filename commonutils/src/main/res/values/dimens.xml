@@ -1,0 +1,37 @@
+<resources>
+
+    <!-- Corner -->
+    <dimen name="corner">0dp</dimen>
+    <dimen name="corner_3">3dp</dimen>
+    <dimen name="corner_5">5dp</dimen>
+    <dimen name="corner_10">10dp</dimen>
+    <dimen name="corner_25">25dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_1">1dp</dimen>
+    <dimen name="padding_3">3dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_25">25dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
+    <dimen name="padding_35">35dp</dimen>
+    <dimen name="padding_40">40dp</dimen>
+    <dimen name="padding_45">45dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_35">35dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_45">45dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+
+</resources>

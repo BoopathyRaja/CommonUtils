@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/blueDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/accent</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="AppTheme">
+        <item name="android:windowBackground">@color/lightWindowBackground</item>
+        <item name="android:textColorPrimary">@color/lightTextPrimary</item>
+        <item name="android:textColorSecondary">@color/lightTextSecondary</item>
+        <item name="android:textColorHint">@color/lightTextHint</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <item name="android:windowBackground">@color/darkWindowBackground</item>
+        <item name="android:textColorPrimary">@color/darkTextPrimary</item>
+        <item name="android:textColorSecondary">@color/darkTextSecondary</item>
+        <item name="android:textColorHint">@color/darkTextHint</item>
+    </style>
+
+    <style name="RedTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/redPrimary</item>
+        <item name="colorPrimaryDark">@color/redDark</item>
+    </style>
+
+    <style name="PinkTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryDark">@color/pinkDark</item>
+    </style>
+
+    <style name="PurpleTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/purplePrimary</item>
+        <item name="colorPrimaryDark">@color/purpleDark</item>
+    </style>
+
+    <style name="DeepPurpleTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/deepPurplePrimary</item>
+        <item name="colorPrimaryDark">@color/deepPurpleDark</item>
+    </style>
+
+    <style name="IndigoTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/indigoPrimary</item>
+        <item name="colorPrimaryDark">@color/indigoDark</item>
+    </style>
+
+    <style name="BlueTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/blueDark</item>
+    </style>
+
+    <style name="LightBlueTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/lightBluePrimary</item>
+        <item name="colorPrimaryDark">@color/lightBlueDark</item>
+    </style>
+
+    <style name="CyanTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/cyanPrimary</item>
+        <item name="colorPrimaryDark">@color/cyanDark</item>
+    </style>
+
+    <style name="TealTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/tealPrimary</item>
+        <item name="colorPrimaryDark">@color/tealDark</item>
+    </style>
+
+    <style name="GreenTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/greenPrimary</item>
+        <item name="colorPrimaryDark">@color/greenDark</item>
+    </style>
+
+    <style name="LightGreenTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/lightGreenPrimary</item>
+        <item name="colorPrimaryDark">@color/lightGreenDark</item>
+    </style>
+
+    <style name="LimeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/limePrimary</item>
+        <item name="colorPrimaryDark">@color/limeDark</item>
+    </style>
+
+    <style name="YellowTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/yellowPrimary</item>
+        <item name="colorPrimaryDark">@color/yellowDark</item>
+    </style>
+
+    <style name="AmberTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/amberPrimary</item>
+        <item name="colorPrimaryDark">@color/amberDark</item>
+    </style>
+
+    <style name="OrangeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/orangePrimary</item>
+        <item name="colorPrimaryDark">@color/orangeDark</item>
+    </style>
+
+    <style name="DeepOrangeTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/deepOrangePrimary</item>
+        <item name="colorPrimaryDark">@color/deepOrangeDark</item>
+    </style>
+
+    <style name="BrownTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/brownPrimary</item>
+        <item name="colorPrimaryDark">@color/brownDark</item>
+    </style>
+
+    <style name="GrayTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/grayPrimary</item>
+        <item name="colorPrimaryDark">@color/grayDark</item>
+    </style>
+
+    <style name="BlueGrayTheme" parent="@style/AppTheme.Light">
+        <item name="colorPrimary">@color/blueGrayPrimary</item>
+        <item name="colorPrimaryDark">@color/blueGrayDark</item>
+    </style>
+
+    <style name="ProgressBar" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="CheckBoxGreen" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="colorControlNormal">@color/accent</item>
+        <item name="colorControlActivated">@color/greenPrimary</item>
+    </style>
+
+    <style name="DividerHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="DividerVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+</resources>

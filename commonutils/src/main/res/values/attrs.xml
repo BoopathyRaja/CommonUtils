@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common Attributes -->
+    <attr name="fontType" format="enum">
+        <enum name="Roboto_Black" value="0" />
+        <enum name="Roboto_BlackItalic" value="1" />
+        <enum name="Roboto_Bold" value="2" />
+        <enum name="Roboto_BoldItalic" value="3" />
+        <enum name="RobotoCondensed_Bold" value="4" />
+        <enum name="RobotoCondensed_BoldItalic" value="5" />
+        <enum name="RobotoCondensed_Italic" value="6" />
+        <enum name="RobotoCondensed_Light" value="7" />
+        <enum name="RobotoCondensed_LightItalic" value="8" />
+        <enum name="RobotoCondensed_Regular" value="9" />
+        <enum name="Roboto_Italic" value="10" />
+        <enum name="Roboto_Light" value="11" />
+        <enum name="Roboto_LightItalic" value="12" />
+        <enum name="Roboto_Medium" value="13" />
+        <enum name="Roboto_MediumItalic" value="14" />
+        <enum name="Roboto_Regular" value="15" />
+        <enum name="Roboto_Thin" value="16" />
+        <enum name="Roboto_ThinItalic" value="17" />
+    </attr>
+
+    <attr name="fontMode" format="enum">
+        <enum name="Normal" value="0" />
+        <enum name="Bold" value="1" />
+        <enum name="Italic" value="2" />
+        <enum name="Bold_Italic" value="3" />
+    </attr>
+
+    <attr name="background" format="reference" />
+
+    <!--  -->
+    <declare-styleable name="TextView">
+        <attr name="fontType" />
+        <attr name="fontMode" />
+    </declare-styleable>
+
+    <!--  -->
+    <declare-styleable name="TextViewInfo">
+        <attr name="valueSize" format="float" />
+        <attr name="valueColor" format="color" />
+        <attr name="value" format="string" />
+
+        <attr name="hintSize" format="float" />
+        <attr name="hintColor" format="color" />
+        <attr name="hint" format="string" />
+
+        <attr name="fontType" />
+        <attr name="fontMode" />
+    </declare-styleable>
+
+    <!--  -->
+    <declare-styleable name="EditText">
+        <attr name="fontType" />
+        <attr name="fontMode" />
+        <attr name="hintIcon" format="reference" />
+        <attr name="background" />
+    </declare-styleable>
+
+    <!--  -->
+    <declare-styleable name="Button">
+        <attr name="type" format="enum">
+            <enum name="NORMAL" value="0" />
+            <enum name="TRANSPARENT" value="1" />
+            <enum name="RED" value="2" />
+            <enum name="PINK" value="3" />
+            <enum name="PURPLE" value="4" />
+            <enum name="DEEP_PURPLE" value="5" />
+            <enum name="INDIGO" value="6" />
+            <enum name="BLUE" value="7" />
+            <enum name="LIGHT_BLUE" value="8" />
+            <enum name="CYAN" value="9" />
+            <enum name="TEAL" value="10" />
+            <enum name="GREEN" value="11" />
+            <enum name="LIGHT_GREEN" value="12" />
+            <enum name="LIME" value="13" />
+            <enum name="YELLOW" value="14" />
+            <enum name="AMBER" value="15" />
+            <enum name="ORANGE" value="16" />
+            <enum name="DEEP_ORANGE" value="17" />
+            <enum name="BROWN" value="18" />
+            <enum name="GRAY" value="19" />
+            <enum name="BLUE_GRAY" value="20" />
+            <enum name="CUSTOM" value="21" />
+        </attr>
+        <attr name="background" />
+    </declare-styleable>
+</resources>

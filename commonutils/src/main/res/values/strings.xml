@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CommonUtils</string>
+
+    <string name="char_box">\u25A0</string>
+    <string name="char_box_6">\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0</string>
+    <string name="char_box_12">\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0\u25A0</string>
+</resources>
