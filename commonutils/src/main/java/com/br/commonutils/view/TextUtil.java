@@ -3,11 +3,9 @@ package com.br.commonutils.view;
 import android.content.Context;
 import android.graphics.Typeface;
 
-import com.br.commonutils.view.textview.TextView;
-
 public class TextUtil {
 
-    public static void applyFont(TextView textView, Context context, FontType fontType, FontMode fontMode) {
+    public static void applyFont(android.widget.TextView textView, Context context, FontType fontType, FontMode fontMode) {
         Typeface typeface;
 
         switch (fontType) {

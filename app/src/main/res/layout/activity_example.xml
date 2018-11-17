@@ -3,26 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10">
 
     <com.br.commonutils.view.textview.TextView
-        style="@style/TextAppearance.AppCompat.Display1"
+        android:id="@+id/exampleActivity_textView_custom"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:text="Custom textview with the data shrink (read more, read less), font-mode and font-type customization"
         app:fontMode="Normal"
         app:fontType="Roboto_Black" />
 
     <com.br.commonutils.view.textview.TextViewInfo
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:layout_marginTop="@dimen/margin_10"
         app:fontMode="Normal"
         app:fontType="Roboto_Light"
-        app:hint="Hint"
+        app:hint="Custom textview-info (Hint data)"
         app:hintColor="@android:color/darker_gray"
         app:hintSize="12"
-        app:value="@string/app_name"
+        app:value="Custom textview-info (Value data)"
         app:valueColor="@android:color/black"
         app:valueSize="20" />
+
+    <com.br.commonutils.view.edittext.EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:text="Custom edittext with background, hint-icon, font-mode and font-type customization"
+        app:fontMode="Normal"
+        app:fontType="Roboto_Regular"
+        app:hintIcon="@android:drawable/ic_secure"
+        app:type="STROKE" />
 </LinearLayout>

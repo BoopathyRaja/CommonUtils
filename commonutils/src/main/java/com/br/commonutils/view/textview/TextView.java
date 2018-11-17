@@ -55,6 +55,7 @@ public class TextView extends AppCompatTextView {
 
     public void makeResizable(int maxLineAtShrinkState) {
         this.maxLineAtShrinkState = maxLineAtShrinkState;
+
         makeResizable(this, maxLineAtShrinkState, true);
     }
 

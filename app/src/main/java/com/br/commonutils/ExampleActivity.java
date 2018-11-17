@@ -6,6 +6,8 @@ import com.br.commonutils.base.CUBasedActivity;
 import com.br.commonutils.base.permission.PermissionHandler;
 import com.br.commonutils.data.permission.DangerousPermission;
 import com.br.commonutils.helper.toaster.Toaster;
+import com.br.commonutils.util.CommonUtil;
+import com.br.commonutils.view.textview.TextView;
 
 import java.util.List;
 
@@ -21,14 +23,13 @@ public class ExampleActivity extends CUBasedActivity {
 
     @Override
     public void init() {
+        TextView textView = findViewById(R.id.exampleActivity_textView_custom);
+        textView.makeResizable(2);
+
         Toaster.init(getApplicationContext(), true);
         toaster().toast("Initialized");
 
-        toaster().toast("1");
-        toaster().toast("2");
-        toaster().toast("3");
-
-//        permission(CommonUtil.asList(DangerousPermission.READ_EXTERNAL_STORAGE, DangerousPermission.ACCESS_FINE_LOCATION, DangerousPermission.RECEIVE_SMS));
+        permissionCheck(CommonUtil.asList(DangerousPermission.READ_EXTERNAL_STORAGE, DangerousPermission.ACCESS_FINE_LOCATION, DangerousPermission.RECEIVE_SMS));
     }
 
     private Toaster toaster() {
@@ -43,7 +44,7 @@ public class ExampleActivity extends CUBasedActivity {
         return retVal;
     }
 
-    private void permission(List<DangerousPermission> dangerousPermissions) {
+    private void permissionCheck(List<DangerousPermission> dangerousPermissions) {
         requestPermission(dangerousPermissions, new PermissionHandler() {
             @Override
             public void result(List<DangerousPermission> granted, List<DangerousPermission> denied) {
@@ -58,7 +59,7 @@ public class ExampleActivity extends CUBasedActivity {
 
             @Override
             public void permissionRationaleFor(List<DangerousPermission> dangerousPermissions) {
-                permission(dangerousPermissions);
+                permissionCheck(dangerousPermissions);
             }
 
             @Override

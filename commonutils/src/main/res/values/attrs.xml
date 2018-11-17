@@ -30,7 +30,7 @@
         <enum name="Bold_Italic" value="3" />
     </attr>
 
-    <attr name="background" format="reference" />
+    <attr name="customBackground" format="reference" />
 
     <!--  -->
     <declare-styleable name="TextView">
@@ -56,36 +56,13 @@
     <declare-styleable name="EditText">
         <attr name="fontType" />
         <attr name="fontMode" />
-        <attr name="hintIcon" format="reference" />
-        <attr name="background" />
-    </declare-styleable>
-
-    <!--  -->
-    <declare-styleable name="Button">
+        <attr name="customBackground" />
         <attr name="type" format="enum">
-            <enum name="NORMAL" value="0" />
-            <enum name="TRANSPARENT" value="1" />
-            <enum name="RED" value="2" />
-            <enum name="PINK" value="3" />
-            <enum name="PURPLE" value="4" />
-            <enum name="DEEP_PURPLE" value="5" />
-            <enum name="INDIGO" value="6" />
-            <enum name="BLUE" value="7" />
-            <enum name="LIGHT_BLUE" value="8" />
-            <enum name="CYAN" value="9" />
-            <enum name="TEAL" value="10" />
-            <enum name="GREEN" value="11" />
-            <enum name="LIGHT_GREEN" value="12" />
-            <enum name="LIME" value="13" />
-            <enum name="YELLOW" value="14" />
-            <enum name="AMBER" value="15" />
-            <enum name="ORANGE" value="16" />
-            <enum name="DEEP_ORANGE" value="17" />
-            <enum name="BROWN" value="18" />
-            <enum name="GRAY" value="19" />
-            <enum name="BLUE_GRAY" value="20" />
-            <enum name="CUSTOM" value="21" />
+            <enum name="BOX" value="0" />
+            <enum name="STROKE" value="1" />
+            <enum name="LINE" value="2" />
+            <enum name="CUSTOM" value="3" />
         </attr>
-        <attr name="background" />
+        <attr name="hintIcon" format="reference" />
     </declare-styleable>
 </resources>
