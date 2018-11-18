@@ -26,6 +26,7 @@ public class ExampleActivity extends CUBasedActivity {
         TextView textView = findViewById(R.id.exampleActivity_textView_custom);
         textView.makeResizable(2);
 
+        // Initialize toaster once
         Toaster.init(getApplicationContext(), true);
         toaster().toast("Initialized");
 
@@ -45,6 +46,7 @@ public class ExampleActivity extends CUBasedActivity {
     }
 
     private void permissionCheck(List<DangerousPermission> dangerousPermissions) {
+        // Request permission
         requestPermission(dangerousPermissions, new PermissionHandler() {
             @Override
             public void result(List<DangerousPermission> granted, List<DangerousPermission> denied) {
