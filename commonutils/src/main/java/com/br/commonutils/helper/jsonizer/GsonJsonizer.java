@@ -16,7 +16,7 @@ public class GsonJsonizer {
 
     private GsonJsonizer() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+//        gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         gsonBuilder.setPrettyPrinting();
         gson = gsonBuilder.create();
     }
