@@ -23,6 +23,16 @@ public class BaseTypeAdapter implements JsonSerializer<Object>, JsonDeserializer
     }
 
     @Override
+    public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonSerializationContext) {
+        JsonElement jsonElement = jsonSerializationContext.serialize(object, object.getClass());
+
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        jsonObject.addProperty(metaKey, object.getClass().getSimpleName());
+
+        return jsonElement;
+    }
+
+    @Override
     public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         try {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -35,15 +45,5 @@ public class BaseTypeAdapter implements JsonSerializer<Object>, JsonDeserializer
         } catch (ClassNotFoundException e) {
             throw new JsonParseException(e);
         }
-    }
-
-    @Override
-    public JsonElement serialize(Object object, Type type, JsonSerializationContext jsonSerializationContext) {
-        JsonElement jsonElement = jsonSerializationContext.serialize(object, object.getClass());
-
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
-        jsonObject.addProperty(metaKey, object.getClass().getSimpleName());
-
-        return jsonElement;
     }
 }

@@ -7,14 +7,20 @@ import com.br.commonutils.base.permission.PermissionHandler;
 import com.br.commonutils.data.common.DimenInfo;
 import com.br.commonutils.data.permission.DangerousPermission;
 import com.br.commonutils.helper.preference.Preference;
+import com.br.commonutils.helper.rest.HeaderParam;
+import com.br.commonutils.helper.rest.MethodType;
+import com.br.commonutils.helper.rest.QueryParam;
+import com.br.commonutils.helper.rest.RestBuilder;
 import com.br.commonutils.helper.snacker.Snacker;
 import com.br.commonutils.helper.snacker.SnackerHandler;
 import com.br.commonutils.helper.toaster.Toaster;
+import com.br.commonutils.provider.Task;
 import com.br.commonutils.util.CommonUtil;
 import com.br.commonutils.view.textview.TextView;
-import com.google.gson.reflect.TypeToken;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
@@ -53,14 +59,21 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         DimenInfo dimenInfo = Preference.make(this, preferenceName)
                 .retrieve("OBJECT", DimenInfo.class);
 
-        // Save & Retrieve - Collection
+        // Save & Retrieve - List
         List<DimenInfo> dimenInfos = CommonUtil.asList(DimenInfo.from(10, 20), DimenInfo.from(30, 40));
         Preference.make(this, preferenceName)
-                .save("COLLECTION", dimenInfos);
-        List<DimenInfo> data = Preference.make(this, preferenceName)
-                .retrieve("COLLECTION", new TypeToken<List<DimenInfo>>() {
-                }.getType());
+                .save("LIST", dimenInfos);
+        List<DimenInfo> listData = Preference.make(this, preferenceName)
+                .retrieveAsList("LIST", DimenInfo.class);
 
+        // Save & Retrieve - Map
+        Map<String, DimenInfo> map = new HashMap<>();
+        map.put("1", DimenInfo.from(1, 1));
+        map.put("2", DimenInfo.from(2, 2));
+        Preference.make(this, preferenceName)
+                .save("MAP", map);
+        Map<String, DimenInfo> mapData = Preference.make(this, preferenceName)
+                .retrieveAsMap("MAP", String.class, DimenInfo.class);
 
         // Toaster
         Toaster.with(this)
@@ -77,6 +90,27 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                 .duration(Snacker.Duration.LONG)
 //                .view(findViewById(R.id.exampleActivity_coordinatorLayout)) // Optional
                 .show();
+
+
+        // Rest Call
+        RestBuilder.make("BASE_URI")
+                .path("PATH")
+                .queryParam(QueryParam.from("", ""))
+                .headerParam(HeaderParam.from("", ""))
+                .methodType(MethodType.GET)
+                .payload(null)
+                .responseType(SampleResponse.class)
+                .execute(new Task<SampleResponse>() {
+                    @Override
+                    public void success(SampleResponse result) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+
+                    }
+                });
     }
 
     @Override

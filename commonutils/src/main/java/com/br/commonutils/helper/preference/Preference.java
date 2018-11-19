@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 public class Preference {
 
@@ -42,6 +45,14 @@ public class Preference {
     public <T> T retrieve(@NonNull String key, @NonNull Type type) {
 //        Type type = new TypeToken<List<String>>() { }.getType();
         return gson.fromJson(sharedPreferences().getString(key, ""), type);
+    }
+
+    public <T> List<T> retrieveAsList(@NonNull String key, @NonNull Class<T> aClass) {
+        return gson.fromJson(sharedPreferences().getString(key, ""), TypeToken.getParameterized(List.class, aClass).getType());
+    }
+
+    public <K, V> Map<K, V> retrieveAsMap(@NonNull String key, @NonNull Class<K> keyType, @NonNull Class<V> valueType) {
+        return gson.fromJson(sharedPreferences().getString(key, ""), TypeToken.getParameterized(Map.class, keyType, valueType).getType());
     }
 
     public void remove(@NonNull String... key) {

@@ -29,7 +29,7 @@ import java.net.URLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
 
-class RestExecutor<T> extends AsyncTask<Param, Void, Result<T>> {
+class RestExecutor extends AsyncTask<Param, Void, RestExecutor.RestResponseData> {
 
     private static final String TAG = RestExecutor.class.getSimpleName();
     private final String charset = "UTF-8";
@@ -42,59 +42,43 @@ class RestExecutor<T> extends AsyncTask<Param, Void, Result<T>> {
 
     private final String baseUri;
     private final Task task;
-    private String uri;
+    private String path;
     private Object payload;
-    private Type responseType;
     private MethodType methodType;
+    private Type responseType;
     private BodyType bodyType;
-
     private Gson gson;
 
-    public RestExecutor(String baseUri, Task task) {
+    public RestExecutor(String baseUri, String path, MethodType methodType, Object payload, BodyType bodyType, Type responseType, Task task) {
         this.baseUri = baseUri;
+        this.path = path;
+        this.methodType = methodType;
+        this.payload = payload;
+        this.bodyType = bodyType;
+        this.responseType = responseType;
         this.task = task;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public void setPayload(Object payload) {
-        this.payload = payload;
-    }
-
-    public void setResponseType(Type responseType) {
-        this.responseType = responseType;
-    }
-
-    public void setMethodType(MethodType methodType) {
-        this.methodType = methodType;
-    }
-
-    public void setBodyType(BodyType bodyType) {
-        this.bodyType = bodyType;
-    }
-
-    public void setGson(Gson gson) {
+    public void gson(Gson gson) {
         this.gson = gson;
     }
 
     @Override
-    protected Result<T> doInBackground(Param... params) {
-        Result<T> retVal = new Result<>();
+    protected RestExecutor.RestResponseData doInBackground(Param... params) {
+        RestExecutor.RestResponseData retVal = new RestResponseData();
 
         try {
             if (ConnectionUtil.isInternetEnabled()) {
                 Uri.Builder builder = Uri.parse(baseUri).buildUpon();
 
-                if (uri.contains("/")) {
-                    String[] split = uri.split("/");
+                if (path.contains("/")) {
+                    String[] split = path.split("/");
 
                     for (String s : split) {
                         builder.appendPath(s);
                     }
                 } else {
-                    builder.appendPath(uri);
+                    builder.appendPath(path);
                 }
 
                 if (Validator.isValid(params) && params.length > 0) {
@@ -179,58 +163,34 @@ class RestExecutor<T> extends AsyncTask<Param, Void, Result<T>> {
                 }
 
                 int responseCode = httpURLConnection.getResponseCode();
-                if (responseCode == HttpsURLConnection.HTTP_OK
-                        || responseCode == HttpsURLConnection.HTTP_CREATED
-                        || responseCode == HttpsURLConnection.HTTP_ACCEPTED) {
-                    InputStream inputStream = httpURLConnection.getInputStream();
-
-                    Result serverResult = getResult(inputStream);
-                    if (Validator.isValid(serverResult)) {
-                        if (serverResult.isStatus()) {
-                            retVal.setStatus(true);
-
-                            if (responseType == Void.class) {
-                                retVal.setData(null);
-                            } else {
-                                Object data = serverResult.getData();
-                                if (Validator.isValid(data)) {
-                                    String jsonData = gson.toJson(data);
-                                    retVal.setData(gson.fromJson(jsonData, responseType));
-                                }
-                            }
-                        } else {
-                            retVal.setMessage(serverResult.getMessage());
-                        }
-                    } else {
-                        retVal.setMessage("No data found");
-                    }
+                if (responseCode == HttpsURLConnection.HTTP_OK || responseCode == HttpsURLConnection.HTTP_CREATED || responseCode == HttpsURLConnection.HTTP_ACCEPTED) {
+                    String responseData = getResult(httpURLConnection.getInputStream());
+                    if (Validator.isValid(responseData))
+                        retVal.object = responseType == Void.class ? Void.TYPE : gson.fromJson(responseData, responseType);
+                    else
+                        retVal.message = "No data found";
                 } else {
-                    InputStream errorStream = httpURLConnection.getErrorStream();
-                    if (Validator.isValid(errorStream)) {
-                        Result result = getResult(errorStream);
-                        retVal.setMessage(result.getMessage());
-                    } else {
-                        retVal.setMessage(httpURLConnection.getResponseMessage() + " (Code " + responseCode + ")");
-                    }
+                    String errorMessage = httpURLConnection.getResponseMessage() + " (Code " + responseCode + ")";
+                    retVal.message = Validator.isValid(errorMessage) ? errorMessage : getResult(httpURLConnection.getErrorStream());
                 }
 
                 httpURLConnection.disconnect();
             } else {
-                retVal.setMessage("Oops... Looks like we have a network info! Please check your internet connection");
+                retVal.message = "Oops... Looks like we have a network error! Please check your internet connection";
             }
         } catch (Exception e) {
-            retVal.setMessage(e.getLocalizedMessage());
+            retVal.message = e.getLocalizedMessage();
         }
 
         return retVal;
     }
 
     @Override
-    protected void onPostExecute(Result<T> result) {
-        if (result.isStatus())
-            task.success(result.getData());
+    protected void onPostExecute(RestExecutor.RestResponseData result) {
+        if (result.isValid())
+            task.success(result.object);
         else
-            task.failure(result.getMessage());
+            task.failure(result.message);
     }
 
     private void addFormField(PrintWriter printWriter, String name, String value) {
@@ -267,8 +227,11 @@ class RestExecutor<T> extends AsyncTask<Param, Void, Result<T>> {
         printWriter.flush();
     }
 
-    private Result getResult(InputStream inputStream) {
-        Result retVal = null;
+    private String getResult(InputStream inputStream) {
+        String retVal = null;
+
+        if (!Validator.isValid(inputStream))
+            return retVal;
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -282,14 +245,21 @@ class RestExecutor<T> extends AsyncTask<Param, Void, Result<T>> {
 
             bufferedReader.close();
 
-            String responseData = response.toString();
-            Logger.logInfo(TAG, responseData);
-
-            retVal = gson.fromJson(responseData, Result.class);
+            retVal = response.toString();
+            Logger.logInfo(TAG, retVal);
         } catch (Exception e) {
 
         }
 
         return retVal;
+    }
+
+    public class RestResponseData {
+        public Object object;
+        public String message;
+
+        public boolean isValid() {
+            return Validator.isValid(object);
+        }
     }
 }
