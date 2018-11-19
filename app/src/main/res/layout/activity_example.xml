@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/exampleActivity_coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="@dimen/padding_10">
 
-    <com.br.commonutils.view.textview.TextView
-        android:id="@+id/exampleActivity_textView_custom"
-        style="@style/TextAppearance.AppCompat.Medium"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Custom textview with the data shrink (read more, read less), font-mode and font-type customization"
-        app:fontMode="Normal"
-        app:fontType="Roboto_Black" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.br.commonutils.view.textview.TextViewInfo
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10"
-        app:fontMode="Normal"
-        app:fontType="Roboto_Light"
-        app:hint="Custom textview-info (Hint data)"
-        app:hintColor="@android:color/darker_gray"
-        app:hintSize="12"
-        app:value="Custom textview-info (Value data)"
-        app:valueColor="@android:color/black"
-        app:valueSize="20" />
+        <com.br.commonutils.view.textview.TextView
+            android:id="@+id/exampleActivity_textView_custom"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Custom textview with the data shrink (read more, read less), font-mode and font-type customization"
+            app:fontMode="Normal"
+            app:fontType="Roboto_Black" />
 
-    <com.br.commonutils.view.edittext.EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10"
-        android:text="Custom edittext with background, hint-icon, font-mode and font-type customization"
-        app:fontMode="Normal"
-        app:fontType="Roboto_Regular"
-        app:hintIcon="@android:drawable/ic_secure"
-        app:type="STROKE" />
-</LinearLayout>
+        <com.br.commonutils.view.textview.TextViewInfo
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            app:fontMode="Normal"
+            app:fontType="Roboto_Light"
+            app:hint="Custom textview-info (Hint data)"
+            app:hintColor="@android:color/darker_gray"
+            app:hintSize="12"
+            app:value="Custom textview-info (Value data)"
+            app:valueColor="@android:color/black"
+            app:valueSize="20" />
+
+        <com.br.commonutils.view.edittext.EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="Custom edittext with background, hint-icon, font-mode and font-type customization"
+            app:fontMode="Normal"
+            app:fontType="Roboto_Regular"
+            app:hintIcon="@android:drawable/ic_secure"
+            app:type="STROKE" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

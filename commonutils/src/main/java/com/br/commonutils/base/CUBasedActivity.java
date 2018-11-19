@@ -10,9 +10,6 @@ import android.view.WindowManager;
 
 import com.br.commonutils.R;
 import com.br.commonutils.base.permission.PermissionActivity;
-import com.br.commonutils.helper.jsonizer.GsonJsonizer;
-import com.br.commonutils.helper.preference.Preference;
-import com.br.commonutils.helper.toaster.Toaster;
 import com.br.commonutils.validator.Validator;
 
 public abstract class CUBasedActivity extends PermissionActivity {
@@ -47,14 +44,7 @@ public abstract class CUBasedActivity extends PermissionActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
         dismissProgressBar();
-
-        try {
-            getToaster().clearAllToast();
-        } catch (IllegalAccessException e) {
-
-        }
     }
 
     @Override
@@ -112,21 +102,6 @@ public abstract class CUBasedActivity extends PermissionActivity {
         } catch (Exception e) {
 
         }
-    }
-
-    public GsonJsonizer getGsonJsonizer() {
-        return GsonJsonizer.getInstance();
-    }
-
-    public Preference getPreferenceFactory() throws IllegalAccessException {
-        return Preference.getInstance();
-    }
-
-    public Toaster getToaster() throws IllegalAccessException {
-        Toaster toastFactory = Toaster.getInstance();
-        toastFactory.setCustomView(false);
-
-        return toastFactory;
     }
 
     private void processBundleData() {
