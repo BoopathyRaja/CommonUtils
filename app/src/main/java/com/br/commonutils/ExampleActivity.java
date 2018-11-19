@@ -34,11 +34,12 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
     @Override
     public void init() {
+        /*********************************************** TEXTVIEW RESIZEABLE ***********************************************/
         TextView textView = findViewById(R.id.exampleActivity_textView_custom);
         textView.makeResizable(2);
 
 
-        // Preference
+        /*********************************************** PREFERENCE ***********************************************/
         String preferenceName = "SAMPLE";
 
         // Save & Retrieve - String
@@ -47,11 +48,13 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         String string = Preference.make(this, preferenceName)
                 .retrieve("STRING");
 
+
         // Save & Retrieve - Boolean
         Preference.make(this, preferenceName)
                 .save("BOOLEAN", true);
         Boolean status = Preference.make(this, preferenceName)
                 .retrieve("BOOLEAN", Boolean.class);
+
 
         // Save & Retrieve - Object
         Preference.make(this, preferenceName)
@@ -59,12 +62,14 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         DimenInfo dimenInfo = Preference.make(this, preferenceName)
                 .retrieve("OBJECT", DimenInfo.class);
 
+
         // Save & Retrieve - List
         List<DimenInfo> dimenInfos = CommonUtil.asList(DimenInfo.from(10, 20), DimenInfo.from(30, 40));
         Preference.make(this, preferenceName)
                 .save("LIST", dimenInfos);
         List<DimenInfo> listData = Preference.make(this, preferenceName)
                 .retrieveAsList("LIST", DimenInfo.class);
+
 
         // Save & Retrieve - Map
         Map<String, DimenInfo> map = new HashMap<>();
@@ -75,7 +80,17 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         Map<String, DimenInfo> mapData = Preference.make(this, preferenceName)
                 .retrieveAsMap("MAP", String.class, DimenInfo.class);
 
-        // Toaster
+
+        /*********************************************** PERMISSION ***********************************************/
+        permissionCheck(
+                CommonUtil.asList(
+                        DangerousPermission.READ_EXTERNAL_STORAGE,
+                        DangerousPermission.ACCESS_FINE_LOCATION,
+                        DangerousPermission.RECEIVE_SMS)
+        );
+
+
+        /*********************************************** TOASTER ***********************************************/
         Toaster.with(this)
                 .message("Toaster")
                 .align(Toaster.Align.CENTER)
@@ -83,7 +98,7 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                 .show();
 
 
-        // Snacker
+        /*********************************************** SNACKER ***********************************************/
         Snacker.with(this)
                 .message("Make permission request")
                 .actionText("OK", this)
@@ -92,12 +107,12 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                 .show();
 
 
-        // Rest Call
+        /*********************************************** REST CALL MAKER ***********************************************/
         RestBuilder.make("BASE_URI")
                 .path("PATH")
                 .queryParam(QueryParam.from("", ""))
                 .headerParam(HeaderParam.from("", ""))
-                .methodType(MethodType.GET)
+                .methodType(MethodType.POST)
                 .payload(null)
                 .responseType(SampleResponse.class)
                 .execute(new Task<SampleResponse>() {
@@ -115,7 +130,7 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
     @Override
     public void onActionClicked() {
-        permissionCheck(CommonUtil.asList(DangerousPermission.READ_EXTERNAL_STORAGE, DangerousPermission.ACCESS_FINE_LOCATION, DangerousPermission.RECEIVE_SMS));
+
     }
 
     // Make Permission
