@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.br.commonutils.data.permission.DangerousPermission;
 import com.br.commonutils.util.CommonUtil;
+import com.br.commonutils.util.Util;
 import com.br.commonutils.validator.Validator;
 
 import java.util.ArrayList;
@@ -19,6 +20,22 @@ import java.util.Map;
 class PermissionUtil {
 
     public static final int REQUEST_ID_PERMISSION_MULTIPLE = 100;
+
+    public static void checkPermissionAreAddedToManifest(@NonNull Context context, @NonNull List<DangerousPermission> requestedDangerousPermissions) throws Exception {
+        List<DangerousPermission> rawDangerousPermission = new ArrayList<>();
+
+        String[] fromManifest = Util.getAddedPermissionsFromManifest(context);
+        for (String rawPermission : fromManifest) {
+            if (isValidDangerousPermission(rawPermission)) {
+                rawDangerousPermission.add(DangerousPermission.toEnum(rawPermission));
+            }
+        }
+
+        for (DangerousPermission dangerousPermission : requestedDangerousPermissions) {
+            if (!rawDangerousPermission.contains(dangerousPermission))
+                throw new Exception(dangerousPermission.toString() + " is not added in manifest");
+        }
+    }
 
     public static boolean checkStatus(@NonNull Context context, @NonNull DangerousPermission dangerousPermission) {
         int permissionStatus = ContextCompat.checkSelfPermission(context, dangerousPermission.toString());
@@ -95,6 +112,10 @@ class PermissionUtil {
                 }
             }
         }
+    }
+
+    private static boolean isValidDangerousPermission(String rawPermission) {
+        return Validator.isValid(DangerousPermission.toEnum(rawPermission));
     }
 
     private static Map<DangerousPermission, Integer> fillPermissionStatus(Context context, List<DangerousPermission> dangerousPermissions) {

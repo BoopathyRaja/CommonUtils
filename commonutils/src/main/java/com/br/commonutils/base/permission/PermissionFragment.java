@@ -18,23 +18,24 @@ public class PermissionFragment extends Fragment implements PermissionRationaleH
     public void requestPermission(@NonNull List<DangerousPermission> dangerousPermissions, @NonNull PermissionHandler permissionHandler) {
         this.permissionHandler = permissionHandler;
 
-        List<DangerousPermission> deniedDangerousPermission = PermissionUtil.getDenied(getActivity(), dangerousPermissions);
-        if (Validator.isValid(deniedDangerousPermission)) {
-//            for (DangerousPermission dangerousPermission : dangerousPermissions) {
-//                requestedPermissions.put(dangerousPermission, PackageManager.PERMISSION_GRANTED);
-//            }
+        try {
+            PermissionUtil.checkPermissionAreAddedToManifest(getContext(), dangerousPermissions);
 
-            String[] requestPermission = new String[dangerousPermissions.size()];
-//            String[] requestPermission = new String[deniedDangerousPermission.size()];
-            for (int i = 0; i < deniedDangerousPermission.size(); i++) {
-                String data = deniedDangerousPermission.get(i).toString();
-                requestPermission[i] = data;
+            List<DangerousPermission> deniedDangerousPermission = PermissionUtil.getDenied(getActivity(), dangerousPermissions);
+            if (Validator.isValid(deniedDangerousPermission)) {
+                String[] requestPermission = new String[dangerousPermissions.size()];
+                for (int i = 0; i < deniedDangerousPermission.size(); i++) {
+                    String data = deniedDangerousPermission.get(i).toString();
+                    requestPermission[i] = data;
+                }
+
+                this.requestPermissions(requestPermission, PermissionUtil.REQUEST_ID_PERMISSION_MULTIPLE);
+            } else {
+                if (Validator.isValid(permissionHandler))
+                    permissionHandler.result(PermissionUtil.getGranted(getContext(), dangerousPermissions), deniedDangerousPermission);
             }
-
-            this.requestPermissions(requestPermission, PermissionUtil.REQUEST_ID_PERMISSION_MULTIPLE);
-        } else {
-            if (Validator.isValid(permissionHandler))
-                permissionHandler.result(PermissionUtil.getGranted(getContext(), dangerousPermissions), deniedDangerousPermission);
+        } catch (Exception e) {
+            permissionHandler.info(e.getMessage());
         }
     }
 

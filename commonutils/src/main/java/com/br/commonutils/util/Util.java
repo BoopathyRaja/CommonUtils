@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -85,6 +86,10 @@ public class Util {
     public static void showSoftKeyboard(@NonNull Context context, @NonNull View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    public static String[] getAddedPermissionsFromManifest(Context context) throws PackageManager.NameNotFoundException {
+        return context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS).requestedPermissions;
     }
 
     public static final Uri getUriFromResource(@NonNull Context context, @AnyRes int resId) {

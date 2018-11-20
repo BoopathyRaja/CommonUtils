@@ -81,15 +81,6 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                 .retrieveAsMap("MAP", String.class, DimenInfo.class);
 
 
-        /*********************************************** PERMISSION ***********************************************/
-        permissionCheck(
-                CommonUtil.asList(
-                        DangerousPermission.READ_EXTERNAL_STORAGE,
-                        DangerousPermission.ACCESS_FINE_LOCATION,
-                        DangerousPermission.RECEIVE_SMS)
-        );
-
-
         /*********************************************** TOASTER ***********************************************/
         Toaster.with(this)
                 .message("Toaster")
@@ -130,7 +121,13 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
     @Override
     public void onActionClicked() {
-
+        /*********************************************** PERMISSION ***********************************************/
+        permissionCheck(
+                CommonUtil.asList(
+                        DangerousPermission.READ_EXTERNAL_STORAGE,
+                        DangerousPermission.ACCESS_FINE_LOCATION,
+                        DangerousPermission.RECEIVE_SMS)
+        );
     }
 
     // Make Permission
