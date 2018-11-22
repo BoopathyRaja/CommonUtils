@@ -123,11 +123,7 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
     @Override
     public void onActionClicked() {
-        permissionCheck(
-                CommonUtil.asList(
-                        DangerousPermission.WRITE_EXTERNAL_STORAGE,
-                        DangerousPermission.USE_BIOMETRIC)
-        );
+        permissionCheck(CommonUtil.asList(DangerousPermission.WRITE_EXTERNAL_STORAGE));
     }
 
     /*********************************************** PERMISSION ***********************************************/
@@ -135,8 +131,7 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         requestPermission(dangerousPermissions, new PermissionHandler() {
             @Override
             public void result(List<DangerousPermission> granted, List<DangerousPermission> denied) {
-                if (granted.contains(DangerousPermission.USE_BIOMETRIC))
-                    authenticateWithFingerprint();
+                authenticateWithFingerprint();
             }
 
             @Override
@@ -164,17 +159,23 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
             FingerprintAuth.with(this, new AuthCallback() {
                 @Override
                 public void succeeded() {
-
+                    Toaster.with(getApplicationContext())
+                            .message("Authenticated")
+                            .show();
                 }
 
                 @Override
                 public void failed(String error) {
-
+                    Toaster.with(getApplicationContext())
+                            .message(error)
+                            .show();
                 }
 
                 @Override
                 public void cancelled() {
-
+                    Toaster.with(getApplicationContext())
+                            .message("Cancelled")
+                            .show();
                 }
             }).showDialog(true).authenticate();
         } catch (Exception e) {
