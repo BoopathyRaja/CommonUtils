@@ -20,6 +20,14 @@ public class DrawableUtil {
 
     private static Drawable defaultCircularUser;
 
+    public static Drawable getApplicationIcon(@NonNull Context context) {
+        try {
+            return context.getPackageManager().getApplicationIcon(context.getPackageName());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static Drawable getDrawable(@NonNull Context context, @DrawableRes int resource) {
         if (VersionUtil.isMarshmallow())
             return ContextCompat.getDrawable(context, resource);

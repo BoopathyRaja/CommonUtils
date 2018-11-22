@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.br.commonutils.R;
+import com.br.commonutils.util.ColorUtil;
 import com.br.commonutils.util.VersionUtil;
 import com.br.commonutils.validator.Validator;
 import com.br.commonutils.view.FontMode;
@@ -69,6 +70,7 @@ public class TextView extends AppCompatTextView {
     private void init() {
         getAttributeSet();
         TextUtil.applyFont(this, context, fontType, fontMode);
+        setTextColor(ColorUtil.getColor(context, R.color.lightTextPrimary));
     }
 
     private void getAttributeSet() {

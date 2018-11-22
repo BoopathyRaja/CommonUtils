@@ -6,6 +6,8 @@ import com.br.commonutils.base.CUBasedActivity;
 import com.br.commonutils.base.permission.PermissionHandler;
 import com.br.commonutils.data.common.DimenInfo;
 import com.br.commonutils.data.permission.DangerousPermission;
+import com.br.commonutils.helper.auth.AuthCallback;
+import com.br.commonutils.helper.auth.FingerprintAuth;
 import com.br.commonutils.helper.preference.Preference;
 import com.br.commonutils.helper.rest.HeaderParam;
 import com.br.commonutils.helper.rest.MethodType;
@@ -93,7 +95,7 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         Snacker.with(this)
                 .message("Make permission request")
                 .actionText("OK", this)
-                .duration(Snacker.Duration.LONG)
+                .duration(Snacker.Duration.INDEFINITE)
 //                .view(findViewById(R.id.exampleActivity_coordinatorLayout)) // Optional
                 .show();
 
@@ -121,23 +123,20 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
 
     @Override
     public void onActionClicked() {
-        /*********************************************** PERMISSION ***********************************************/
         permissionCheck(
                 CommonUtil.asList(
-                        DangerousPermission.READ_EXTERNAL_STORAGE,
-                        DangerousPermission.ACCESS_FINE_LOCATION,
-                        DangerousPermission.RECEIVE_SMS)
+                        DangerousPermission.WRITE_EXTERNAL_STORAGE,
+                        DangerousPermission.USE_BIOMETRIC)
         );
     }
 
-    // Make Permission
+    /*********************************************** PERMISSION ***********************************************/
     private void permissionCheck(List<DangerousPermission> dangerousPermissions) {
         requestPermission(dangerousPermissions, new PermissionHandler() {
             @Override
             public void result(List<DangerousPermission> granted, List<DangerousPermission> denied) {
-                Toaster.with(getApplicationContext())
-                        .message("Granted " + granted.size() + "\nDenied " + denied.size())
-                        .show();
+                if (granted.contains(DangerousPermission.USE_BIOMETRIC))
+                    authenticateWithFingerprint();
             }
 
             @Override
@@ -157,5 +156,31 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                         .show();
             }
         });
+    }
+
+    /*********************************************** BIO-METRIC ***********************************************/
+    private void authenticateWithFingerprint() {
+        try {
+            FingerprintAuth.with(this, new AuthCallback() {
+                @Override
+                public void succeeded() {
+
+                }
+
+                @Override
+                public void failed(String error) {
+
+                }
+
+                @Override
+                public void cancelled() {
+
+                }
+            }).showDialog(true).authenticate();
+        } catch (Exception e) {
+            Toaster.with(getApplicationContext())
+                    .message(e.getMessage())
+                    .show();
+        }
     }
 }

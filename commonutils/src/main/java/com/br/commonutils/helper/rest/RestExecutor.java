@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.br.commonutils.log.Logger;
 import com.br.commonutils.provider.Task;
-import com.br.commonutils.util.ConnectionUtil;
+import com.br.commonutils.util.Util;
 import com.br.commonutils.validator.Validator;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -68,7 +68,7 @@ class RestExecutor extends AsyncTask<Param, Void, RestExecutor.RestResponseData>
         RestExecutor.RestResponseData retVal = new RestResponseData();
 
         try {
-            if (ConnectionUtil.isInternetEnabled()) {
+            if (Util.isInternetEnabled()) {
                 Uri.Builder builder = Uri.parse(baseUri).buildUpon();
 
                 if (path.contains("/")) {

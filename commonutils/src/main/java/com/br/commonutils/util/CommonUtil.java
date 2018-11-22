@@ -7,7 +7,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
 
-import com.br.commonutils.provider.Task;
+import com.br.commonutils.provider.DelayProvider;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,12 +16,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class CommonUtil {
 
-    public static void makeDelay(long milliSeconds, Task<Boolean> task) {
-        new Handler().postDelayed(() -> task.success(true), milliSeconds);
+    public static void makeDelay(DelayProvider delayProvider) {
+        new Handler().postDelayed(() -> delayProvider.completed(), delayProvider.delayFor());
+    }
+
+    public static String getUniqueKey() {
+        return UUID.randomUUID().toString();
     }
 
     public static int getRandomNumber(int end) {

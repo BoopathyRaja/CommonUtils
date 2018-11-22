@@ -32,7 +32,9 @@ public enum DangerousPermission implements Stringifier {
     RECEIVE_WAP_PUSH(Manifest.permission.RECEIVE_WAP_PUSH),
     RECEIVE_MMS(Manifest.permission.RECEIVE_MMS),
     READ_EXTERNAL_STORAGE(Manifest.permission.READ_EXTERNAL_STORAGE),
-    WRITE_EXTERNAL_STORAGE(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    WRITE_EXTERNAL_STORAGE(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+    USE_FINGERPRINT(Manifest.permission.USE_FINGERPRINT),
+    USE_BIOMETRIC(Manifest.permission.USE_BIOMETRIC);
 
     private static final Map<String, DangerousPermission> VALUES = new HashMap<>();
 
