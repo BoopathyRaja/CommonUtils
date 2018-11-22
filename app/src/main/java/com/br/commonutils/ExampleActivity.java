@@ -6,8 +6,6 @@ import com.br.commonutils.base.CUBasedActivity;
 import com.br.commonutils.base.permission.PermissionHandler;
 import com.br.commonutils.data.common.DimenInfo;
 import com.br.commonutils.data.permission.DangerousPermission;
-import com.br.commonutils.helper.auth.AuthCallback;
-import com.br.commonutils.helper.auth.FingerprintAuth;
 import com.br.commonutils.helper.preference.Preference;
 import com.br.commonutils.helper.rest.HeaderParam;
 import com.br.commonutils.helper.rest.MethodType;
@@ -131,7 +129,9 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         requestPermission(dangerousPermissions, new PermissionHandler() {
             @Override
             public void result(List<DangerousPermission> granted, List<DangerousPermission> denied) {
-                authenticateWithFingerprint();
+                Toaster.with(getApplicationContext())
+                        .message("Permission request result")
+                        .show();
             }
 
             @Override
@@ -151,37 +151,5 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                         .show();
             }
         });
-    }
-
-    /*********************************************** BIO-METRIC ***********************************************/
-    private void authenticateWithFingerprint() {
-        try {
-            FingerprintAuth.with(this, new AuthCallback() {
-                @Override
-                public void authSucceeded() {
-                    Toaster.with(getApplicationContext())
-                            .message("Authenticated")
-                            .show();
-                }
-
-                @Override
-                public void authFailed(String error) {
-                    Toaster.with(getApplicationContext())
-                            .message(error)
-                            .show();
-                }
-
-                @Override
-                public void authCancelled() {
-                    Toaster.with(getApplicationContext())
-                            .message("Cancelled")
-                            .show();
-                }
-            }).showDialog(true).authenticate();
-        } catch (Exception e) {
-            Toaster.with(getApplicationContext())
-                    .message(e.getMessage())
-                    .show();
-        }
     }
 }

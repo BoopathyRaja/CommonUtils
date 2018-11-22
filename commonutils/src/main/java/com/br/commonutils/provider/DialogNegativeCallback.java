@@ -1,4 +1,4 @@
-package com.br.commonutils.dialog;
+package com.br.commonutils.provider;
 
 public interface DialogNegativeCallback {
 
