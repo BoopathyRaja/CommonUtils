@@ -110,12 +110,12 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
                 .responseType(SampleResponse.class)
                 .execute(new Task<SampleResponse>() {
                     @Override
-                    public void success(SampleResponse result) {
+                    public void taskSucceeded(SampleResponse result) {
 
                     }
 
                     @Override
-                    public void failure(String message) {
+                    public void taskFailed(String message) {
 
                     }
                 });
@@ -158,21 +158,21 @@ public class ExampleActivity extends CUBasedActivity implements SnackerHandler {
         try {
             FingerprintAuth.with(this, new AuthCallback() {
                 @Override
-                public void succeeded() {
+                public void authSucceeded() {
                     Toaster.with(getApplicationContext())
                             .message("Authenticated")
                             .show();
                 }
 
                 @Override
-                public void failed(String error) {
+                public void authFailed(String error) {
                     Toaster.with(getApplicationContext())
                             .message(error)
                             .show();
                 }
 
                 @Override
-                public void cancelled() {
+                public void authCancelled() {
                     Toaster.with(getApplicationContext())
                             .message("Cancelled")
                             .show();

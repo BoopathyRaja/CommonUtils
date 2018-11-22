@@ -188,9 +188,9 @@ class RestExecutor extends AsyncTask<Param, Void, RestExecutor.RestResponseData>
     @Override
     protected void onPostExecute(RestExecutor.RestResponseData result) {
         if (result.isValid())
-            task.success(result.object);
+            task.taskSucceeded(result.object);
         else
-            task.failure(result.message);
+            task.taskFailed(result.message);
     }
 
     private void addFormField(PrintWriter printWriter, String name, String value) {

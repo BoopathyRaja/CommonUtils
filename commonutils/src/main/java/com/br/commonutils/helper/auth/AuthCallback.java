@@ -2,9 +2,9 @@ package com.br.commonutils.helper.auth;
 
 public interface AuthCallback {
 
-    void succeeded();
+    void authSucceeded();
 
-    void failed(String error);
+    void authFailed(String error);
 
-    void cancelled();
+    void authCancelled();
 }

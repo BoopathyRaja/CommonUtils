@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class CommonUtil {
 
     public static void makeDelay(DelayProvider delayProvider) {
-        new Handler().postDelayed(() -> delayProvider.completed(), delayProvider.delayFor());
+        new Handler().postDelayed(() -> delayProvider.delayCompleted(), delayProvider.delayFor());
     }
 
     public static String getUniqueKey() {

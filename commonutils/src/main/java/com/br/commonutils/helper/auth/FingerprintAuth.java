@@ -51,15 +51,15 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
     public static FingerprintAuth with(@NonNull Context context, @NonNull AuthCallback authCallback) throws Exception {
         KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
         if (!keyguardManager.isKeyguardSecure())
-            authCallback.failed("Secure lock screen hasn't set up. Go to 'Settings -> Security -> Fingerprint' to set up a fingerprint");
+            authCallback.authFailed("Secure lock screen hasn't set up. Go to 'Settings -> Security -> Fingerprint' to set up a fingerprint");
 
         fingerprintManagerCompat = FingerprintManagerCompat.from(context);
 
         if (!fingerprintManagerCompat.isHardwareDetected())
-            authCallback.failed("Your Device does not have a Fingerprint Sensor");
+            authCallback.authFailed("Your Device does not have a Fingerprint Sensor");
 
         if (!fingerprintManagerCompat.hasEnrolledFingerprints())
-            authCallback.failed("Go to 'Settings -> Security -> Fingerprint' and register at least one fingerprint");
+            authCallback.authFailed("Go to 'Settings -> Security -> Fingerprint' and register at least one fingerprint");
 
         return new FingerprintAuth(context, authCallback);
     }
@@ -109,7 +109,7 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
             builder.description("");
             builder.buttonText("Cancel");
             builder.dialogNegativeCallback(() -> {
-                authCallback.cancelled();
+                authCallback.authCancelled();
                 fingerprintDialog.dismiss();
             });
 
@@ -125,7 +125,7 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
         fingerprintDialog.setDescription(errString.toString());
         fingerprintDialog.invalidate();
 
-        authCallback.failed(errString.toString());
+        authCallback.authFailed(errString.toString());
     }
 
     @Override
@@ -135,7 +135,7 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
         fingerprintDialog.setDescription(helpString.toString());
         fingerprintDialog.invalidate();
 
-        authCallback.failed(helpString.toString());
+        authCallback.authFailed(helpString.toString());
     }
 
     @Override
@@ -143,7 +143,7 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
         super.onAuthenticationSucceeded(result);
 
         fingerprintDialog.dismiss();
-        authCallback.succeeded();
+        authCallback.authSucceeded();
     }
 
     @Override
@@ -153,6 +153,6 @@ public class FingerprintAuth extends FingerprintManagerCompat.AuthenticationCall
         fingerprintDialog.setDescription("Authentication Failed");
         fingerprintDialog.invalidateAndDismiss();
 
-        authCallback.failed("Authentication Failed");
+        authCallback.authFailed("Authentication Failed");
     }
 }

@@ -2,7 +2,7 @@ package com.br.commonutils.provider;
 
 public interface Task<T> {
 
-    void success(T result);
+    void taskSucceeded(T result);
 
-    void failure(String message);
+    void taskFailed(String message);
 }
