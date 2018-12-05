@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -35,7 +36,7 @@ class RestExecutor extends AsyncTask<Param, Void, RestExecutor.RestResponseData>
     private final String charset = "UTF-8";
     private final String BOUNDARY = "**********";
     private final String TWO_HYPHENS = "--";
-    private final String LINE_FEED = "\n";
+    private final String LINE_FEED = "\r\n";
 
     private final String JSON_MEDIA_TYPE = "application/json";
     private final String JSON_MULTIPART = "multipart/form-data; boundary=" + BOUNDARY;
@@ -134,23 +135,38 @@ class RestExecutor extends AsyncTask<Param, Void, RestExecutor.RestResponseData>
                         case FORM_DATA: {
                             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(dataOutputStream, charset), true);
 
-                            Class<?> componentClass = payload.getClass();
-                            for (Field field : componentClass.getDeclaredFields()) {
-                                field.setAccessible(true);
+                            if (payload instanceof Map) {
+                                Map<String, Object> map = (Map<String, Object>) payload;
 
-                                String filedName = field.getName();
-                                Object filedValue = field.get(payload);
+                                for (String fieldName : map.keySet()) {
+                                    Object filedValue = map.get(fieldName);
 
-                                SerializedName serializedName = field.getAnnotation(SerializedName.class);
-                                if (Validator.isValid(serializedName))
-                                    filedName = serializedName.value();
+                                    if (filedValue instanceof File)
+                                        addFilePart(printWriter, dataOutputStream, fieldName, (File) filedValue);
+                                    else if (filedValue instanceof String)
+                                        addFormField(printWriter, fieldName, (String) filedValue);
+                                    else
+                                        addFormField(printWriter, fieldName, gson.toJson(filedValue));
+                                }
+                            } else {
+                                Class<?> componentClass = payload.getClass();
+                                for (Field field : componentClass.getDeclaredFields()) {
+                                    field.setAccessible(true);
 
-                                if (filedValue instanceof File)
-                                    addFilePart(printWriter, dataOutputStream, filedName, (File) filedValue);
-                                else if (filedValue instanceof String)
-                                    addFormField(printWriter, filedName, (String) filedValue);
-                                else
-                                    addFormField(printWriter, filedName, gson.toJson(filedValue));
+                                    String filedName = field.getName();
+                                    Object filedValue = field.get(payload);
+
+                                    SerializedName serializedName = field.getAnnotation(SerializedName.class);
+                                    if (Validator.isValid(serializedName))
+                                        filedName = serializedName.value();
+
+                                    if (filedValue instanceof File)
+                                        addFilePart(printWriter, dataOutputStream, filedName, (File) filedValue);
+                                    else if (filedValue instanceof String)
+                                        addFormField(printWriter, filedName, (String) filedValue);
+                                    else
+                                        addFormField(printWriter, filedName, gson.toJson(filedValue));
+                                }
                             }
 
                             printWriter.append(TWO_HYPHENS + BOUNDARY + TWO_HYPHENS);

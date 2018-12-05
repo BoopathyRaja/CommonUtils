@@ -72,7 +72,7 @@ public class Util {
 
     public static void restartApp(Activity activity, @NonNull Class<?> activityToStart) {
         Intent intent = new Intent(activity, activityToStart);
-        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 130219, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 130290, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);

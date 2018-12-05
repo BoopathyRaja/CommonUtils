@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
+import com.br.commonutils.validator.Validator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,20 +40,44 @@ public class Preference {
     }
 
     public <T> T retrieve(@NonNull String key, @NonNull Class<T> aClass) {
-        return gson.fromJson(sharedPreferences().getString(key, ""), aClass);
+        T retVal = null;
+
+        String rawData = retrieve(key);
+        if (Validator.isValid(rawData))
+            retVal = gson.fromJson(rawData, aClass);
+
+        return retVal;
     }
 
     public <T> T retrieve(@NonNull String key, @NonNull Type type) {
+        T retVal = null;
+
+        String rawData = retrieve(key);
+        if (Validator.isValid(rawData))
+            retVal = gson.fromJson(rawData, type);
+
 //        Type type = new TypeToken<List<String>>() { }.getType();
-        return gson.fromJson(sharedPreferences().getString(key, ""), type);
+        return retVal;
     }
 
     public <T> List<T> retrieveAsList(@NonNull String key, @NonNull Class<T> aClass) {
-        return gson.fromJson(sharedPreferences().getString(key, ""), TypeToken.getParameterized(List.class, aClass).getType());
+        List<T> retVal = null;
+
+        String rawData = retrieve(key);
+        if (Validator.isValid(rawData))
+            retVal = gson.fromJson(rawData, TypeToken.getParameterized(List.class, aClass).getType());
+
+        return retVal;
     }
 
     public <K, V> Map<K, V> retrieveAsMap(@NonNull String key, @NonNull Class<K> keyType, @NonNull Class<V> valueType) {
-        return gson.fromJson(sharedPreferences().getString(key, ""), TypeToken.getParameterized(Map.class, keyType, valueType).getType());
+        Map<K, V> retVal = null;
+
+        String rawData = retrieve(key);
+        if (Validator.isValid(rawData))
+            retVal = gson.fromJson(rawData, TypeToken.getParameterized(Map.class, keyType, valueType).getType());
+
+        return retVal;
     }
 
     public void remove(@NonNull String... key) {

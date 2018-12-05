@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="external_files"
+        path="." />
+</paths>
+
+
+    <!-- Add the below line AndroidManifest.xml inside <application> tag --><!--<provider--><!--android:name="android.support.v4.content.FileProvider"--><!--android:authorities="{app package name}.provider"--><!--android:exported="false"--><!--android:grantUriPermissions="true">--><!--<meta-data--><!--android:name="android.support.FILE_PROVIDER_PATHS"--><!--android:resource="@xml/provider_paths" />--><!--</provider>-->

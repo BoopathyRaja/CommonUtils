@@ -1,6 +1,7 @@
 package com.br.commonutils.base;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -11,13 +12,21 @@ import android.view.WindowManager;
 import com.br.commonutils.R;
 import com.br.commonutils.base.permission.PermissionActivity;
 import com.br.commonutils.validator.Validator;
+import com.google.android.gms.auth.api.credentials.Credential;
+
+import java.lang.reflect.Type;
 
 public abstract class CUBasedActivity extends PermissionActivity {
 
-    public final String EXTRA_OVERRIDE_TRANSITION = "extraOverrideTransition";
+    public static final int REQUEST_CODE_SMS_RETRIEVER = 101;
+    public static final String EXTRA_OVERRIDE_TRANSITION = "extraOverrideTransition";
     private ProgressDialog progressDialog;
 
     public abstract void init();
+
+    public void extra(Object data, Type type, String... extras) {
+        // Override if needed
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,22 @@ public abstract class CUBasedActivity extends PermissionActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_SMS_RETRIEVER) {
+            if (Validator.isValid(data)) {
+                Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
+                if (Validator.isValid(credential)) {
+                    String unformattedPhoneNumber = credential.getId();
+
+                    extra(unformattedPhoneNumber, String.class, "SMS Retriever - Selected unformatted phone number");
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void showProgressBar() {

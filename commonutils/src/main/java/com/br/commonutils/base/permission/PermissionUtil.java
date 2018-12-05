@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class PermissionUtil {
+public class PermissionUtil {
 
     public static final int REQUEST_ID_PERMISSION_MULTIPLE = 100;
 
@@ -67,49 +67,44 @@ class PermissionUtil {
     }
 
     public static void processResult(Context context, String[] permissions, int[] grantResults, Map<DangerousPermission, Integer> requestedPermissions, PermissionHandler permissionHandler, PermissionRationaleHandler permissionRationaleHandler) {
-        if (grantResults.length > 0) {
-            List<DangerousPermission> granted = new ArrayList<>();
-            List<DangerousPermission> denied = new ArrayList<>();
+        List<DangerousPermission> granted = new ArrayList<>();
+        List<DangerousPermission> denied = new ArrayList<>();
 
-            boolean isAllPermissionsGranted = true;
-            List<DangerousPermission> permissionRationale = new ArrayList<>();
+        boolean isAllPermissionsGranted = true;
+        List<DangerousPermission> permissionRationale = new ArrayList<>();
 
-            for (int i = 0; i < permissions.length; i++)
-                requestedPermissions.put(DangerousPermission.toEnum(permissions[i]), grantResults[i]);
+        for (int i = 0; i < permissions.length; i++) {
+            requestedPermissions.put(DangerousPermission.toEnum(permissions[i]), grantResults[i]);
+        }
 
-            for (DangerousPermission key : requestedPermissions.keySet()) {
-                if (requestedPermissions.get(key) == PackageManager.PERMISSION_GRANTED) {
-                    granted.add(key);
-                } else {
-                    isAllPermissionsGranted = false;
-                    denied.add(key);
-                }
-
-                boolean shouldShowRequestPermissionRationale = permissionRationaleHandler.showRequestPermissionRationale(key.toString());
-                if (shouldShowRequestPermissionRationale)
-                    permissionRationale.add(key);
+        for (DangerousPermission key : requestedPermissions.keySet()) {
+            if (requestedPermissions.get(key) == PackageManager.PERMISSION_GRANTED) {
+                granted.add(key);
+            } else {
+                isAllPermissionsGranted = false;
+                denied.add(key);
             }
 
-            if (Validator.isValid(permissionHandler)) {
-                if (isAllPermissionsGranted) {
-                    permissionHandler.result(granted, denied);
-                } else {
-                    if (!permissionRationale.isEmpty() && permissionHandler.permissionRationale()) {
-                        PermissionUtil.showDialog(context, permissionRationaleMessage(permissionRationale), (dialog, which) -> {
-                            switch (which) {
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    permissionHandler.permissionRationaleFor(permissionRationale);
-                                    break;
+            boolean shouldShowRequestPermissionRationale = permissionRationaleHandler.showRequestPermissionRationale(key.toString());
+            if (shouldShowRequestPermissionRationale)
+                permissionRationale.add(key);
+        }
 
-                                case DialogInterface.BUTTON_NEGATIVE:
-//                                    permissionHandler.info(SOME_PERMISSION_DENIED);
-                                    break;
-                            }
-                        });
-                    } else {
-                        permissionHandler.info("Some permissions are denied, Go to app settings and enable it");
+        if (Validator.isValid(permissionHandler)) {
+            if (!permissionRationale.isEmpty() && permissionHandler.permissionRationale()) {
+                showDialog(context, permissionRationaleMessage(permissionRationale), (dialog, which) -> {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            permissionHandler.permissionRationaleFor(permissionRationale);
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            permissionHandler.info("Some permissions are denied, Go to app settings and enable it");
+                            break;
                     }
-                }
+                });
+            } else {
+                permissionHandler.result(granted, denied);
             }
         }
     }
