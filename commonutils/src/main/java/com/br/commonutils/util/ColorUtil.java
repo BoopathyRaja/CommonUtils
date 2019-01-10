@@ -7,9 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
@@ -46,6 +50,13 @@ public class ColorUtil {
         } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
 
         }
+    }
+
+    public static Drawable changeDrawableColor(Context context, @DrawableRes int icon, @ColorRes int newColor) {
+        Drawable drawable = ContextCompat.getDrawable(context, icon).mutate();
+        drawable.setColorFilter(new PorterDuffColorFilter(getColor(context, newColor), PorterDuff.Mode.SRC_IN));
+
+        return drawable;
     }
 
     public static void changeImageColor(@NonNull final ImageView imageView, @ColorInt int fromColor, @ColorInt int toColor) {

@@ -3,7 +3,6 @@ package com.br.commonutils.helper.imagecache;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -22,24 +21,18 @@ class CustomCircleBitmapDisplayer implements BitmapDisplayer {
 
     protected final Integer strokeColor;
     protected final float strokeWidth;
-    protected final int backgroundColor;
 
     public CustomCircleBitmapDisplayer() {
-        this(null, 0, Color.TRANSPARENT);
+        this(null, 0);
     }
 
     public CustomCircleBitmapDisplayer(Integer strokeColor) {
-        this(strokeColor, 0, Color.TRANSPARENT);
+        this(strokeColor, 0);
     }
 
     public CustomCircleBitmapDisplayer(Integer strokeColor, float strokeWidth) {
-        this(strokeColor, strokeWidth, Color.TRANSPARENT);
-    }
-
-    public CustomCircleBitmapDisplayer(Integer strokeColor, float strokeWidth, int backgroundColor) {
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;
-        this.backgroundColor = backgroundColor;
     }
 
     @Override
@@ -47,7 +40,7 @@ class CustomCircleBitmapDisplayer implements BitmapDisplayer {
         if (!(imageAware instanceof ImageViewAware))
             throw new IllegalArgumentException("ImageAware should wrap ImageView. ImageViewAware is expected.");
 
-        imageAware.setImageDrawable(new CircleDrawable(bitmap, strokeColor, strokeWidth, backgroundColor));
+        imageAware.setImageDrawable(new CircleDrawable(bitmap, strokeColor, strokeWidth));
     }
 
     public static class CircleDrawable extends Drawable {
@@ -58,12 +51,11 @@ class CustomCircleBitmapDisplayer implements BitmapDisplayer {
         protected final Paint paint;
         protected final Paint paintStroke;
         protected final float strokeWidth;
-        protected final int backgroundColor;
         protected float radius;
         protected Bitmap bitmap;
         protected float strokeRadius;
 
-        public CircleDrawable(Bitmap bitmap, Integer strokeColor, float strokeWidth, int backgroundColor) {
+        public CircleDrawable(Bitmap bitmap, Integer strokeColor, float strokeWidth) {
             this.bitmap = bitmap;
             radius = Math.min(bitmap.getWidth(), bitmap.getHeight()) / 2;
 
@@ -83,14 +75,11 @@ class CustomCircleBitmapDisplayer implements BitmapDisplayer {
             this.strokeWidth = strokeWidth;
             strokeRadius = radius - strokeWidth / 2;
 
-            this.backgroundColor = backgroundColor;
-
             paint = new Paint();
             paint.setAntiAlias(true);
-            paint.setColor(backgroundColor);
-//            paint.setShader(bitmapShader);
-//            paint.setFilterBitmap(true);
-//            paint.setDither(true);
+            paint.setShader(bitmapShader);
+            paint.setFilterBitmap(true);
+            paint.setDither(true);
         }
 
         @Override
@@ -109,11 +98,11 @@ class CustomCircleBitmapDisplayer implements BitmapDisplayer {
 
         @Override
         public void draw(Canvas canvas) {
-            canvas.drawCircle(radius, radius, radius, paint);
+//            int cx = (canvas.getWidth() - bitmap.getWidth()) >> 1;
+//            int cy = (canvas.getHeight() - bitmap.getHeight()) >> 1;
+//            canvas.drawBitmap(bitmap, cx, cy, paint);
 
-            int cx = (canvas.getWidth() - bitmap.getWidth()) >> 1;
-            int cy = (canvas.getHeight() - bitmap.getHeight()) >> 1;
-            canvas.drawBitmap(bitmap, cx, cy, paint);
+            canvas.drawCircle(radius, radius, radius, paint);
 
             if (paintStroke != null)
                 canvas.drawCircle(radius, radius, strokeRadius, paintStroke);

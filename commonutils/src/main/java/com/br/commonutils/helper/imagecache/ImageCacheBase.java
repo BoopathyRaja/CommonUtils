@@ -118,16 +118,16 @@ class ImageCacheBase {
         return processImage(inputStream, dimenInfo, getCircularDisplayer(10, Color.WHITE));
     }
 
-    protected DisplayImageOptions avatarDIO(int strokeColor, int backgroundColor) {
-        return processImage(null, null, getCustomCircularDisplayer(10, strokeColor, backgroundColor));
+    protected DisplayImageOptions avatarDIO(int strokeColor) {
+        return processImage(null, null, getCustomCircularDisplayer(10, strokeColor));
     }
 
-    protected DisplayImageOptions avatarDIO(DimenInfo dimenInfo, int strokeColor, int backgroundColor) {
-        return processImage(null, dimenInfo, getCustomCircularDisplayer(10, strokeColor, backgroundColor));
+    protected DisplayImageOptions avatarDIO(DimenInfo dimenInfo, int strokeColor) {
+        return processImage(null, dimenInfo, getCustomCircularDisplayer(10, strokeColor));
     }
 
-    protected DisplayImageOptions avatarDIO(InputStream inputStream, DimenInfo dimenInfo, int strokeColor, int backgroundColor) {
-        return processImage(inputStream, dimenInfo, getCustomCircularDisplayer(10, strokeColor, backgroundColor));
+    protected DisplayImageOptions avatarDIO(InputStream inputStream, DimenInfo dimenInfo, int strokeColor) {
+        return processImage(inputStream, dimenInfo, getCustomCircularDisplayer(10, strokeColor));
     }
 
     private DisplayImageOptions processImage(InputStream inputStream, final DimenInfo dimenInfo, BitmapDisplayer bitmapDisplayer) {
@@ -171,7 +171,7 @@ class ImageCacheBase {
         return new CircleBitmapDisplayer(strokeColor, strokeWidth);
     }
 
-    private BitmapDisplayer getCustomCircularDisplayer(int strokeWidth, int strokeColor, int backgroundColor) {
-        return new CustomCircleBitmapDisplayer(strokeColor, strokeWidth, backgroundColor);
+    private BitmapDisplayer getCustomCircularDisplayer(int strokeWidth, int strokeColor) {
+        return new CustomCircleBitmapDisplayer(strokeColor, strokeWidth);
     }
 }

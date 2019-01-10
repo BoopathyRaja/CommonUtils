@@ -45,9 +45,9 @@ public class ImageCache {
         imageCache = new ImageCache(context);
     }
 
-    public static ImageCache getInstance() throws IllegalAccessException {
+    public static ImageCache getInstance() {
         if (!Validator.isValid(imageCache))
-            throw new IllegalAccessException("Call init()");
+            throw new RuntimeException("Call init()");
 
         return imageCache;
     }
@@ -84,16 +84,23 @@ public class ImageCache {
         renderCircular(imageView, path, defaultImage, dimenInfo);
     }
 
-    public void loadCircular(@NonNull ImageView imageView, String path, @DrawableRes int defaultImage, @ColorRes int strokeColor, @ColorRes int backgroundColor) {
-        loadCircular(imageView, path, defaultImage, strokeColor, backgroundColor, null);
+    public void loadCircular(@NonNull ImageView imageView, String path, @DrawableRes int defaultImage, @ColorRes int strokeColor) {
+        loadCircular(imageView, path, defaultImage, strokeColor, null);
     }
 
-    public void loadCircular(@NonNull ImageView imageView, String path, @DrawableRes int defaultImage, @ColorRes int strokeColor, @ColorRes int backgroundColor, DimenInfo dimenInfo) {
-        renderCircular(imageView, path, defaultImage, strokeColor, backgroundColor, dimenInfo);
+    public void loadCircular(@NonNull ImageView imageView, String path, @DrawableRes int defaultImage, @ColorRes int strokeColor, DimenInfo dimenInfo) {
+        renderCircular(imageView, path, defaultImage, strokeColor, dimenInfo);
     }
 
     public void refresh() {
         imageCacheBase.refreshImageLoader(context);
+    }
+
+    public void clear(@NonNull ImageView... imageViews) {
+        for (ImageView imageView : imageViews) {
+//            clearCache((String) imageView.getTag());
+            imageView.setTag(null);
+        }
     }
 
     public void clearCache(@NonNull String imagePath) {
@@ -174,18 +181,14 @@ public class ImageCache {
         renderNormal(imageView, path, defaultImage, displayImageOptions);
     }
 
-    private void renderCircular(ImageView imageView, String path, int defaultImage, int strokeColor, int backgroundColor, DimenInfo dimenInfo) {
-        if (strokeColor == -1)
-            strokeColor = ColorUtil.getColor(context, R.color.white);
-
-        if (backgroundColor == -1)
-            backgroundColor = ColorUtil.getColor(context, R.color.white);
+    private void renderCircular(ImageView imageView, String path, int defaultImage, int strokeColor, DimenInfo dimenInfo) {
+        strokeColor = ColorUtil.getColor(context, strokeColor == -1 ? R.color.white : strokeColor);
 
         DisplayImageOptions displayImageOptions;
         if (Validator.isValid(dimenInfo))
-            displayImageOptions = imageCacheBase.avatarDIO(dimenInfo, strokeColor, backgroundColor);
+            displayImageOptions = imageCacheBase.avatarDIO(dimenInfo, strokeColor);
         else
-            displayImageOptions = imageCacheBase.avatarDIO(strokeColor, backgroundColor);
+            displayImageOptions = imageCacheBase.avatarDIO(strokeColor);
 
         renderNormal(imageView, path, defaultImage, displayImageOptions);
     }
